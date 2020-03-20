@@ -76,12 +76,18 @@ export default {
       ]
   }),
   methods: {
-      login() {
-        this.$refs.loginform.validate() ? this.proceed() : false
-      },
-      proceed() {
-          this.$router.push({ name: 'Dashboard' })
-      }
+        login() {
+            this.$refs.loginform.validate() ? this.proceed() : false
+        },
+        proceed() {
+            this.$router.push({ name: 'Dashboard' })
+        },
+        mounted () {
+            axios
+            .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+            .then(response => (this.info = response))
+        }
   }
+  
 }
 </script>
